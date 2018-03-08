@@ -53,15 +53,16 @@ module.exports = {
       // File loader for image assets
       // We'll add only image extensions, but you can things like svgs, fonts and videos
       {
-        test: /\.(svg|png|jpg|gif)$/,
-        use: [
-          'file-loader',
-        ],
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+        }
       },
     ],
   },
   // Automatically transform files with these extensions
   resolve: {
-    extensions: ['.js', '.jsx', '.scss', '.json']
+    extensions: ['.js', '.jsx', '.scss', '.json', '.png']
   },
 };

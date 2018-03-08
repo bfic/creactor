@@ -4,4 +4,11 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 30px;
+
+}
+
+.img {
+	background-image: url('../assets/keen.png');
+	width: 100px;
+	height: 200px;
 }

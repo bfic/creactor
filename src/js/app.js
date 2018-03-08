@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 import '../css/style.css'; 
-import keenImage from '../assets/keen.png'; 
 
 export default class App extends Component {
   constructor(props) {
@@ -19,7 +18,8 @@ export default class App extends Component {
         <div>
           Hello from react
         </div>
-        <img src={ keenImage } alt='Commander Keen' />
+        <div className="img" alt='Commander Keen' />
+        <img src={ require('../assets/keen.png') } />
       </div>
       );
   }
