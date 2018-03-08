@@ -51,7 +51,6 @@ module.exports = {
         }),
       },
       // File loader for image assets
-      // We'll add only image extensions, but you can things like svgs, fonts and videos
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',

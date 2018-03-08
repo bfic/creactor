@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server",
-    "clean": "rm build/bundle.js | rm build/style.css"
+    "clean": "rm -R build/*"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -16,6 +16,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.0.6",
+    "url-loader": "^1.0.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.10",
     "webpack-dev-server": "^3.1.0"
