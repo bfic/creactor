@@ -30,7 +30,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(paths.SRC, 'index.html'),
     }),
-    new ExtractTextPlugin('style.bundle.css'),
+    new ExtractTextPlugin({ filename: 'style.bundle.css', allChunks: true}),
   ],
   module: {
     rules: [
@@ -41,22 +41,33 @@ module.exports = {
           'babel-loader',
         ],
       },
-      // CSS loader to CSS files
-      // Files will get handled by css loader and then passed to the extract text plugin
-      // which will write it to the file we defined above
+      // CSS loader for style assets
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          use: 'css-loader',
-        }),
+        test: /\.scss$/,
+        use: [
+          {
+              loader: "style-loader" // creates style nodes from JS strings
+          }, 
+          {
+              loader: "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]" // translates CSS into CommonJS
+          }, 
+          {
+              loader: "sass-loader" // compiles Sass to CSS
+          }
+        ]
       },
-      // File loader for image assets
+      // Url loader for image assets
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
         }
+      },
+      // Url loader for font assets
+      {
+          test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+          use: 'url-loader'
       },
     ],
   },

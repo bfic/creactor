@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import '../css/style.css'; 
+
+let styles = require('../css/style.scss');
 
 export default class App extends Component {
   constructor(props) {
@@ -13,12 +14,13 @@ export default class App extends Component {
   }
 
   render() {
+    console.log(styles);
     return (
       <div>
         <div>
           Hello from react
         </div>
-        <div className="img" alt='Commander Keen' />
+        <div className={styles.img} alt='Commander Keen' />
         <img src={ require('../assets/keen.png') } />
       </div>
       );
