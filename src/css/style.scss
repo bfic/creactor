@@ -5,10 +5,11 @@
 }
 
 html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-width: 320px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-width: 320px;
+
   body {
     background: #f9fafb;
     font-family: Helvetica, Arial, sans-serif;
@@ -19,8 +20,9 @@ html {
 
     .img {
       background-image: url('../assets/keen.png');
-      width: 100px;
-      height: 200px;
+      width: 320px;
+      height: 479px;
+      backgeound-size: 100% 100%;
     }
   }
 }

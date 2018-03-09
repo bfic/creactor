@@ -14,7 +14,7 @@ const paths = {
 
 // Webpack configuration
 module.exports = {
-  entry: path.join(paths.JS, 'app.js'),
+  entry: path.join(paths.JS, 'App.js'),
 
   // Set 'mode' option to 'development' or 'production' to enable defaults for this environment. 
   mode: 'development',
@@ -71,6 +71,10 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    historyApiFallback: true,
+  },
+  
   // Automatically transform files with these extensions
   resolve: {
     extensions: ['.js', '.jsx', '.scss', '.json', '.png']
