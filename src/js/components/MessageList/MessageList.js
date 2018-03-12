@@ -10,10 +10,10 @@ export default class MessageList extends Component {
     super(props);
 
     this.state = {
-		 time: '',
-     messageList: [
+		  time: '',
+      messageList: [
         {
-          id:1,
+          id: 1,
           message: "Hello"
         },
         {
@@ -26,6 +26,8 @@ export default class MessageList extends Component {
         }
       ],
       formDisplayed: false,
+      formAction: null, // 'add' / 'edit'
+      messageFormObj: null
     };
 
     this.timer = setInterval(() => {
@@ -36,13 +38,17 @@ export default class MessageList extends Component {
 
     this.toggleFormDisplayed = this.toggleFormDisplayed.bind(this);
 
+    this.addMessage = this.addMessage.bind(this);
+    this.updateMessage = this.updateMessage.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
+
   }
 
   componentWillUnmount() {
   	window.clearInterval(this.timer);
   }
 
-  toggleFormDisplayed (value) {
+  toggleFormDisplayed (value, obj) {
     console.log(value);
     /* 
       If value is passed we are setting formDisplay to value 
@@ -57,19 +63,64 @@ export default class MessageList extends Component {
         formDisplayed: !this.state.formDisplayed,
       })
     }
+
+    if (obj) {
+      /* Update message */
+      this.setState({
+        messageFormObj: obj,
+        formAction: 'update',
+      }) 
+    } else {
+      /* Add new message */
+      this.setState({
+        messageFormObj: {
+          id: this.state.messageList.length+1,
+          message: '',
+        },
+        formAction: 'add'
+      }) 
+    }
   }
 
+  addMessage (obj) {
+    // this is reactive
+    this.state.messageList.push(obj);
+    this.setState({
+      messageFormObj: {
+        id: this.state.messageList.length+1,
+        message: '',
+      },
+      formAction: 'add'
+    }) 
+    console.log(this);
+}
 
+  deleteMessage (messageId) {
+    // this is also reactive
+    let index = undefined;
+    this.state.messageList.map((msg, i) => {
+      if (msg.id == messageId) {
+        index = i;
+      }
+    });
+    this.state.messageList.splice(index, 1); 
+  }
+
+  updateMessage () {
+
+  }
 
   render () {
+
 	  return (
 	    <div className={styles.messageList} >
 	      <h1>Time {this.state.time}</h1>
-        { this.state.messageList.map((message) =>
+        {this.state.messageList.map((message) =>
           <Message 
             key={message.id}
             obj={message} 
             toggleFormDisplayed={this.toggleFormDisplayed}
+            deleteMessage={this.deleteMessage}
           />
         )}
 
@@ -77,8 +128,13 @@ export default class MessageList extends Component {
           Add new message
         </button>
 
-        { this.state.formDisplayed &&
-          <MessageForm obj={null} ></MessageForm>
+        {this.state.formDisplayed &&
+          <MessageForm 
+            obj={this.state.messageFormObj} 
+            formAction={this.state.formAction}
+            addMessage={this.addMessage}
+            updateMessage={this.updateMessage}
+          ></MessageForm>
         }
 	    </div>
 	  );

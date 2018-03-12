@@ -14,12 +14,13 @@ export default class Message extends Component {
   }
 
   handleEditClick () {
-    this.props.toggleFormDisplayed();
+    this.props.toggleFormDisplayed(true, this.props.obj);
   }
 
   handleDeleteClick () {
-
+    this.props.deleteMessage(this.props.obj.id);
   }
+
   render () {
 	  return (
 	    <div className={styles.message} >
@@ -27,13 +28,8 @@ export default class Message extends Component {
           {this.props.obj.message}
         </div>
 
-        <button className={styles.button} onClick={this.handleEditClick} >
-          Edit
-        </button>
-
-        <button  className={styles.button} onClick={this.handleDeleteClick} >
-          Delete
-        </button>
+        <button className={styles.button} onClick={this.handleEditClick} >Edit</button>
+        <button  className={styles.button} onClick={this.handleDeleteClick} >Delete</button>
 	    </div>
 	  );
   }
