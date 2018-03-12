@@ -38,21 +38,23 @@ class ApiController {
         .then(
           function(response) {
             if (response.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
+              console.log('Looks like there was a problem. Status Code: ' + response.status);
+              failure(response);
               return;
             }
 
-              // Examine the text in the response
-              response.json().then(function(data) {
-                console.log(data);
-                success();
-              });
-            }
-            )
+            success(response);
+
+            // Examine the text in the response
+            response.json().then(function(data) {
+              console.log(data);
+              success();
+            });
+          }
+        )
         .catch(function(err) {
           console.log('Fetch Error :-S', err);
-          filure();
+          failure();
         });
       };
 

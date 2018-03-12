@@ -23,8 +23,10 @@ export default class App extends Component {
 
     };
 
-    console.log(MessageController);
-    MessageController.all(() => {}, () => {});
+    MessageController.all(
+      (res) => { console.log(res); }, 
+      (err) => { console.log(err); }
+    )
   }
 
   render() {
