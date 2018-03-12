@@ -13,28 +13,20 @@ export default class MessageForm extends Component {
     this.handleSaveClick = this.handleSaveClick.bind(this);
   }
 
-  componentWillReceiveProps (a,b) {
-    //console.log(a,b);
-  }
-
   handleSaveClick () {
     let newObj = Object.assign({}, this.props.obj);
     newObj.message = this.state.messageText;
 
-    if (this.props.formAction == 'add') {
-      this.props.addMessage(newObj);
-      this.setState({
-        messageText: '',
-      })
-    } else if (this.props.formAction == 'update') {
-      this.props.editMessage(obj);
-    }
+    this.props.addMessage(newObj);
+    this.setState({
+      messageText: '',
+    })
   }
 
   render () {
 	  return (
 	    <div className={styles.messageForm} >
-        { this.props.obj.message.length > 0 ? 'Edit message': 'Add new message'}
+        { 'Add new message'}
         <br/>
         <input 
           type="text" 

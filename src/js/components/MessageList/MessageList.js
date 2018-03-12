@@ -36,8 +36,6 @@ export default class MessageList extends Component {
     	});
     }, 1000);
 
-    this.toggleFormDisplayed = this.toggleFormDisplayed.bind(this);
-
     this.addMessage = this.addMessage.bind(this);
     this.updateMessage = this.updateMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
@@ -46,40 +44,6 @@ export default class MessageList extends Component {
 
   componentWillUnmount() {
   	window.clearInterval(this.timer);
-  }
-
-  toggleFormDisplayed (value, obj) {
-    console.log(value);
-    /* 
-      If value is passed we are setting formDisplay to value 
-      If no we are setting formDisplayed to its negative value 
-    */
-    if (value) {
-      this.setState({
-        formDisplayed: value,
-      })
-    } else {
-      this.setState({
-        formDisplayed: !this.state.formDisplayed,
-      })
-    }
-
-    if (obj) {
-      /* Update message */
-      this.setState({
-        messageFormObj: obj,
-        formAction: 'update',
-      }) 
-    } else {
-      /* Add new message */
-      this.setState({
-        messageFormObj: {
-          id: this.state.messageList.length+1,
-          message: '',
-        },
-        formAction: 'add'
-      }) 
-    }
   }
 
   addMessage (obj) {
@@ -111,6 +75,10 @@ export default class MessageList extends Component {
   }
 
   render () {
+    const newMessage = {
+      id: this.state.messageList.length+1,
+      message: '',
+    };
 
 	  return (
 	    <div className={styles.messageList} >
@@ -119,7 +87,6 @@ export default class MessageList extends Component {
           <Message 
             key={message.id}
             obj={message} 
-            toggleFormDisplayed={this.toggleFormDisplayed}
             deleteMessage={this.deleteMessage}
           />
         )}
@@ -128,14 +95,11 @@ export default class MessageList extends Component {
           Add new message
         </button>
 
-        {this.state.formDisplayed &&
-          <MessageForm 
-            obj={this.state.messageFormObj} 
-            formAction={this.state.formAction}
-            addMessage={this.addMessage}
-            updateMessage={this.updateMessage}
-          ></MessageForm>
-        }
+        <MessageForm 
+          obj={newMessage} 
+          addMessage={this.addMessage}
+        >
+        </MessageForm>
 	    </div>
 	  );
   }

@@ -14,7 +14,6 @@ export default class Message extends Component {
   }
 
   handleEditClick () {
-    this.props.toggleFormDisplayed(true, this.props.obj);
   }
 
   handleDeleteClick () {
