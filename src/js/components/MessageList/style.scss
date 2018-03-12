@@ -1,0 +1,12 @@
+.messageList {
+  width: 100%;
+  float: left;
+  display; flex;
+  flex: flow: row;
+
+  .button {
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}

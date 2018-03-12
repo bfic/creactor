@@ -11,6 +11,7 @@ let styles = require('../css/style.scss');
 
 import Home from './pages/Home';
 import About from './pages/About';
+import Messages from './pages/Messages';
 
 export default class App extends Component {
   constructor(props) {
@@ -22,26 +23,18 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(styles);
     return (
       <div>
-        <div>
-          Hello from react
-        </div>
-        <div className={styles.img} alt='Commander Keen' />
-
         <Router>
-          <div className="container">
+          <div className="content">
             <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/messages">Messages</Link></li>
+              <li><Link to="/about">About</Link></li>
             </ul>
 
             <Route exact path="/" component={Home} />
+            <Route exact path="/messages" component={Messages} />
             <Route exact path="/about" component={About} />
           </div>
         </Router>
