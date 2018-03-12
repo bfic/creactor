@@ -13,6 +13,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Messages from './pages/Messages';
 
+import MessageController from './../api/MessageController'
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +22,9 @@ export default class App extends Component {
     this.state = {
 
     };
+
+    console.log(MessageController);
+    MessageController.all(() => {}, () => {});
   }
 
   render() {

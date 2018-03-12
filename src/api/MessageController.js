@@ -7,7 +7,7 @@ class MessageController extends ApiController {
   }
 
   static create (obj, success, failure) {
-    this.post('/workspaces/' + workspaceUrl + '/projects/' + projectId + '/tasks', obj, {}, function(result){
+    this.post('/messages', obj, {}, function(result){
       success(result);
     }, function(result) {
       failure(result);
@@ -15,7 +15,7 @@ class MessageController extends ApiController {
   }
 
   static all (success, failure) {
-    this.get('/workspaces/' + workspaceUrl + '/projects/' + projectId + '/tasks', null, {}, function(result){
+    this.get('/messages/', null, {}, function(result){
       success(result);
     }, function(result) {
       failure(result);
@@ -23,7 +23,7 @@ class MessageController extends ApiController {
   }
 
   static getSingle (messageId, success, failure) {
-    this.get('/workspaces/' + workspaceUrl + '/projects/' + projectId + '/tasks/' + taskId, null, {}, function(result){
+    this.get('/messages/' + messageId, null, {}, function(result){
       success(result);
     }, function(result) {
       failure(result);
@@ -31,15 +31,15 @@ class MessageController extends ApiController {
   }
 
   static update(messageId, object, success, failure) {
-    this.put('/workspaces/' + workspaceUrl + '/projects/' + projectId + '/tasks/' + taskId, object, {}, function(result){
+    this.put('/messages/'+ messageId, object, {}, function(result){
       success(result);
     }, function(result) {
       failure(result);
     });
   }
 
-  static delete (messageId, projectId, taskId, success, failure) {
-    this.del('/workspaces/' + workspaceUrl + '/projects/' + projectId + '/tasks/' + taskId, {}, {}, function(result){
+  static delete (messageId, success, failure) {
+    this.del('/messages/' + messageId, {}, {}, function(result){
       success(result);
     }, function(result) {
       failure(result);
