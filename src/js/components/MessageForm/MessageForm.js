@@ -13,6 +13,7 @@ export default class MessageForm extends Component {
   render () {
 	  return (
 	    <div className={styles.messageForm} >
+      FORM
 	    </div>
 	  );
   }

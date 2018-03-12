@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Message from './../Message/Message';
+import MessageForm from './../MessageForm/MessageForm';
 
 let styles = require('./style.scss');
 
@@ -11,15 +12,20 @@ export default class MessageList extends Component {
     this.state = {
 		 time: '',
      messageList: [
-      {
-        id:1,
-        message: "Hello"
-      },
-      {
-        id: 2,
-        message: 'Hi!'
-      }
-    ],
+        {
+          id:1,
+          message: "Hello"
+        },
+        {
+          id: 2,
+          message: 'Hi!'
+        },
+        {
+          id: 3,
+          message: 'OOOOOO SDSDSDSSD',
+        }
+      ],
+      formDisplayed: false,
     };
 
     this.timer = setInterval(() => {
@@ -28,11 +34,31 @@ export default class MessageList extends Component {
     	});
     }, 1000);
 
+    this.toggleFormDisplayed = this.toggleFormDisplayed.bind(this);
+
   }
 
   componentWillUnmount() {
   	window.clearInterval(this.timer);
   }
+
+  toggleFormDisplayed (value) {
+    console.log(value);
+    /* 
+      If value is passed we are setting formDisplay to value 
+      If no we are setting formDisplayed to its negative value 
+    */
+    if (value) {
+      this.setState({
+        formDisplayed: value,
+      })
+    } else {
+      this.setState({
+        formDisplayed: !this.state.formDisplayed,
+      })
+    }
+  }
+
 
 
   render () {
@@ -43,9 +69,17 @@ export default class MessageList extends Component {
           <Message 
             key={message.id}
             obj={message} 
+            toggleFormDisplayed={this.toggleFormDisplayed}
           />
         )}
-        <button className={styles.button}>Add new message</button>
+
+        <button className={styles.button} onClick={(e) => this.toggleFormDisplayed() } >
+          Add new message
+        </button>
+
+        { this.state.formDisplayed &&
+          <MessageForm obj={null} ></MessageForm>
+        }
 	    </div>
 	  );
   }
