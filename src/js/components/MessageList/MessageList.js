@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
-import Message from './../Message/Message';
-import MessageForm from './../MessageForm/MessageForm';
+import PropTypes from 'prop-types';
+import MessageContainer from './../../../redux/containers/MessageContainer';
+import MessageFormContainer from './../../../redux/containers/MessageFormContainer';
 
 let styles = require('./style.scss');
 
@@ -11,21 +11,7 @@ export default class MessageList extends Component {
 
     this.state = {
 		  time: '',
-      messageList: [
-        {
-          id: 1,
-          message: "Hello"
-        },
-        {
-          id: 2,
-          message: 'Hi!'
-        },
-        {
-          id: 3,
-          message: 'OOOOOO SDSDSDSSD',
-        }
-      ],
-      formDisplayed: false,
+      messageList: [],
       formAction: null, // 'add' / 'edit'
       messageFormObj: null
     };
@@ -39,8 +25,11 @@ export default class MessageList extends Component {
     this.addMessage = this.addMessage.bind(this);
     this.updateMessage = this.updateMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
+  };
 
-  }
+  static propTypes: {
+    messageList: PropTypes.array.isRequired,
+  };
 
   componentWillUnmount() {
   	window.clearInterval(this.timer);
@@ -51,13 +40,13 @@ export default class MessageList extends Component {
     this.state.messageList.push(obj);
     this.setState({
       messageFormObj: {
-        id: this.state.messageList.length+1,
+        id: this.props.messageList.length+1,
         message: '',
       },
       formAction: 'add'
     }) 
     console.log(this);
-}
+  }
 
   deleteMessage (messageId) {
     // this is also reactive
@@ -83,8 +72,8 @@ export default class MessageList extends Component {
 	  return (
 	    <div className={styles.messageList} >
 	      <h1>Time {this.state.time}</h1>
-        {this.state.messageList.map((message) =>
-          <Message 
+        {this.props.messageList.map((message) =>
+          <MessageContainer
             key={message.id}
             obj={message} 
             deleteMessage={this.deleteMessage}
@@ -95,11 +84,11 @@ export default class MessageList extends Component {
           Add new message
         </button>
 
-        <MessageForm 
+        <MessageFormContainer
           obj={newMessage} 
           addMessage={this.addMessage}
         >
-        </MessageForm>
+        </MessageFormContainer>
 	    </div>
 	  );
   }

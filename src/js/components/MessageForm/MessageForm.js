@@ -1,40 +1,37 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 let styles = require('./style.scss');
+
 
 export default class MessageForm extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      messageText: this.props.obj.message,
-    };
-
-    this.handleSaveClick = this.handleSaveClick.bind(this);
-  }
-
-  handleSaveClick () {
-    let newObj = Object.assign({}, this.props.obj);
-    newObj.message = this.state.messageText;
-
-    this.props.addMessage(newObj);
-    this.setState({
-      messageText: '',
-    })
+    this.input = '';
   }
 
   render () {
-	  return (
-	    <div className={styles.messageForm} >
-        { 'Add new message'}
-        <br/>
-        <input 
-          type="text" 
-          value={this.state.messageText} 
-          onChange={(event) => { this.setState({messageText: event.target.value}) }}
-        />
-        <button className={styles.button} onClick={this.handleSaveClick}>Save</button>
-	    </div>
-	  );
+    console.log(this);
+    return (
+      <div className={styles.messageForm} >
+        <form onSubmit={e => {
+            e.preventDefault()
+            if (!this.input.value.trim()) {
+              return
+            }
+            this.props.addMessage(this.input.value)
+            this.input.value = ''
+          }}
+        >
+          {'Add new message'}
+          <br/>
+          <input 
+            type="text" 
+            ref={ node => { this.input = node }}
+          />
+          <button className={styles.button} type="submit">Save</button>
+        </form>
+      </div>
+    );
   }
 }

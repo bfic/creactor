@@ -1,11 +1,11 @@
 import React from 'react';
 
-import MessageList from './../components/MessageList/MessageList'
+import MessageListContainer from './../../redux/containers/MessageListContainer'
 
 const Messages = () => {
   return (
     <div className="container">
-      <MessageList />
+      <MessageListContainer />
     </div>
   );
 }

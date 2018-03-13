@@ -7,6 +7,10 @@ import {
   Link
 } from 'react-router-dom';
 
+/* REDUX */
+import { Provider } from "react-redux";
+import store from "../redux/store/index";
+
 let styles = require('../css/style.scss');
 
 import Home from './pages/Home';
@@ -51,4 +55,9 @@ export default class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>, 
+  document.getElementById('app')
+);
