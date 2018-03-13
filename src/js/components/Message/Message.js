@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
 import { deleteMessage } from './../../../redux/actions';
+import MessageEditContainer from './../../../redux/containers/MessageEditContainer';
 
 let styles = require('./style.scss');
 
@@ -10,6 +10,7 @@ export default class Message extends Component {
     super(props);
 
     this.state = {
+      editActive: false
     };
 
 
@@ -23,6 +24,9 @@ export default class Message extends Component {
 
 
   handleEditClick () {
+    this.setState({
+      editActive: !this.state.editActive
+    });
   }
 
   handleDeleteClick () {
@@ -32,20 +36,25 @@ export default class Message extends Component {
   render () {
 	  return (
 	    <div className={styles.message} >
-        <div className={styles.text}>
-          {this.props.obj.text}
+        <div className={styles.inner}>
+          <div className={styles.text}>
+            {this.props.obj.text}
+          </div>
+
+          <button className={styles.button} onClick={this.handleEditClick} >Edit</button>
+          <button  
+            className={styles.button}
+            onClick={e => {
+              e.preventDefault()
+              // dispatch(deleteTodo())
+
+              this.props.deleteMessage(this.props.obj.id);
+            }}
+          >Delete</button>
         </div>
-
-        <button className={styles.button} onClick={this.handleEditClick} >Edit</button>
-        <button  
-          className={styles.button}
-          onClick={e => {
-            e.preventDefault()
-            // dispatch(deleteTodo())
-
-            this.props.deleteMessage(this.props.obj.id);
-          }}
-        >Delete</button>
+        {this.state.editActive &&
+          <MessageEditContainer obj={this.props.obj} />
+        }
 	    </div>
 	  );
   }

@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, DELETE_MESSAGE } from "../constants/action-types";
+import { ADD_MESSAGE, DELETE_MESSAGE, UPDATE_MESSAGE } from "../constants/action-types";
 
 const messageReducer = (state = [], action) => {
   switch (action.type) {
@@ -13,6 +13,17 @@ const messageReducer = (state = [], action) => {
 
     case DELETE_MESSAGE:
       return state.filter(message => message.id !== action.id);
+
+    case UPDATE_MESSAGE:
+      return state.map(message => {
+        if (message.id === action.id)  {
+          let newObj = Object.assing({}, message);
+          newObj.text = action.text;
+          return newObj;
+        } else {
+          return message
+        }
+      })
 
     default:
       return state;

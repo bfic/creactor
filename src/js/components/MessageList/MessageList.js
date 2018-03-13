@@ -80,10 +80,6 @@ export default class MessageList extends Component {
           />
         )}
 
-        <button className={styles.button} onClick={(e) => this.toggleFormDisplayed() } >
-          Add new message
-        </button>
-
         <MessageFormContainer
           obj={newMessage} 
           addMessage={this.addMessage}

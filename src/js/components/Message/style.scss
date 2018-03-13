@@ -1,20 +1,26 @@
-.message {
-  display: flex;
-  flex-flow: row;
+.message {  
+  width: 100%;
   padding: 10px;
+  float: left;
 
   &:hover {
     background: #dddddd;
   }
 
-  .text {
-    float: left;
-    flex: 1;
-  }
+  .inner {
 
-  .button {
-    margin-left: 10px;
-    margin-right: 10px;
-    cursor: pointer;
+    display: flex;
+    flex-flow: row;
+
+    .text {
+      float: left;
+      flex: 1;
+    }
+
+    .button {
+      margin-left: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
   }
-}
+  }
