@@ -16,9 +16,9 @@ const messageReducer = (state = [], action) => {
 
     case UPDATE_MESSAGE:
       return state.map(message => {
-        if (message.id === action.id)  {
-          let newObj = Object.assing({}, message);
-          newObj.text = action.text;
+        if (message.id === action.obj.id)  {
+          let newObj = Object.assign({}, message);
+          newObj.text = action.obj.text;
           return newObj;
         } else {
           return message

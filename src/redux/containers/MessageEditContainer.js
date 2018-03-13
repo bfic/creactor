@@ -4,8 +4,8 @@ import { updateMessage } from './../actions/index'
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    updateMessage: (id) => {
-      dispatch(updateMessage(id));
+    updateMessage: (obj) => {
+      dispatch(updateMessage(obj));
     }
   }
 }

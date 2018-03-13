@@ -24,11 +24,14 @@ export default class MessageEdit extends Component {
       <div className={styles.messageEdit} >
         <form onSubmit={e => {
             e.preventDefault()
-            if (!this.input.value.trim()) {
+            if (!this.state.input.trim()) {
               return
             }
-            this.props.addMessage(this.input.value)
-            this.input.value = ''
+            let obj = {
+              id: this.props.obj.id,
+              text: this.state.input
+            }
+            this.props.updateMessage(obj);
           }}
         >
           {'Edit message: '} {this.props.obj.id}

@@ -14,9 +14,9 @@ export const deleteMessage = id => {
   }
 }
 
-export const updateMessage = id => {
+export const updateMessage = obj => {
   return {
     type: UPDATE_MESSAGE,
-    id: id
+    obj: obj
   }
 }
