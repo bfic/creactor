@@ -45,7 +45,6 @@ export default class MessageList extends Component {
       },
       formAction: 'add'
     }) 
-    console.log(this);
   }
 
   deleteMessage (messageId) {

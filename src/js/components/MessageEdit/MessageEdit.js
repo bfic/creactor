@@ -32,6 +32,7 @@ export default class MessageEdit extends Component {
               text: this.state.input
             }
             this.props.updateMessage(obj);
+            this.props.toggleEditClick(false);
           }}
         >
           {'Edit message: '} {this.props.obj.id}

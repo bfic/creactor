@@ -23,10 +23,16 @@ export default class Message extends Component {
   };
 
 
-  handleEditClick () {
-    this.setState({
-      editActive: !this.state.editActive
-    });
+  handleEditClick (value) {
+    if (value) {
+      this.setState({
+        editActive: value
+      });
+    } else {
+      this.setState({
+        editActive: !this.state.editActive
+      });
+    }
   }
 
   handleDeleteClick () {
@@ -46,14 +52,15 @@ export default class Message extends Component {
             className={styles.button}
             onClick={e => {
               e.preventDefault()
-              // dispatch(deleteTodo())
-
               this.props.deleteMessage(this.props.obj.id);
             }}
           >Delete</button>
         </div>
         {this.state.editActive &&
-          <MessageEditContainer obj={this.props.obj} />
+          <MessageEditContainer 
+            toggleEditClick={this.handleEditClick}
+            obj={this.props.obj} 
+          />
         }
 	    </div>
 	  );
