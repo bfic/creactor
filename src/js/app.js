@@ -9,7 +9,8 @@ import {
 
 /* REDUX */
 import { Provider } from "react-redux";
-import store from "../redux/store/index";
+import configureStore from '../redux/store'
+const store = configureStore();
 
 let styles = require('../css/style.scss');
 
@@ -18,6 +19,7 @@ import About from './pages/About';
 import Messages from './pages/Messages';
 
 import MessageController from './../api/MessageController'
+
 
 export default class App extends Component {
   constructor(props) {
