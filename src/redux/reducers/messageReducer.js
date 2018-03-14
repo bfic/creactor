@@ -38,15 +38,17 @@ const messageReducer = (state = [], action) => {
       return newState;
 
     case UPDATE_MESSAGE:
-      return state.map(message => {
+      newState = Object.assign({}, state);
+      newState.messageList.map((message) => {
         if (message.id === action.obj.id)  {
-          let newObj = Object.assign({}, message);
-          newObj.text = action.obj.text;
-          return newObj;
-        } else {
-          return message
+           message.text = action.obj.text;
         }
       })
+
+      asyncLocalStorage.setItem('applicationState', JSON.stringify(newState)).then((result) => {
+      });
+      
+      return newState;
 
     case REQUEST_MESSAGES:
       return Object.assign({}, state, {
