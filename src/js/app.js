@@ -29,10 +29,12 @@ export default class App extends Component {
 
     };
 
+    /*
     MessageController.all(
       (res) => { console.log(res); }, 
       (err) => { console.log(err); }
     )
+    */
   }
 
   render() {

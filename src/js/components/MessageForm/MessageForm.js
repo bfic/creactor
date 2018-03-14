@@ -18,7 +18,7 @@ export default class MessageForm extends Component {
             if (!this.input.value.trim()) {
               return
             }
-            this.props.addMessage(this.input.value)
+            this.props.addMessage(this.props.messageList.length+1, this.input.value)
             this.input.value = ''
           }}
         >

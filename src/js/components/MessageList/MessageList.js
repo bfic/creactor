@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MessageContainer from './../../../redux/containers/MessageContainer';
 import MessageFormContainer from './../../../redux/containers/MessageFormContainer';
+import { fetchMessages } from './../../../redux/actions/index';
 
 let styles = require('./style.scss');
 
@@ -31,13 +32,18 @@ export default class MessageList extends Component {
     messageList: PropTypes.array.isRequired,
   };
 
+  componentDidMount() {
+    /* Fetching data on initial mount */
+    const { dispatch, messageList, isFetching } = this.props
+    dispatch(fetchMessages());
+    console.log(this.props);
+  }
+
   componentWillUnmount() {
   	window.clearInterval(this.timer);
   }
 
   addMessage (obj) {
-    // this is reactive
-    this.state.messageList.push(obj);
     this.setState({
       messageFormObj: {
         id: this.props.messageList.length+1,
@@ -50,7 +56,7 @@ export default class MessageList extends Component {
   deleteMessage (messageId) {
     // this is also reactive
     let index = undefined;
-    this.state.messageList.map((msg, i) => {
+    this.props.messageList.map((msg, i) => {
       if (msg.id == messageId) {
         index = i;
       }
@@ -68,23 +74,28 @@ export default class MessageList extends Component {
       message: '',
     };
 
-	  return (
-	    <div className={styles.messageList} >
-	      <h1>Time {this.state.time}</h1>
-        {this.props.messageList.map((message) =>
-          <MessageContainer
-            key={message.id}
-            obj={message} 
-            deleteMessage={this.deleteMessage}
-          />
-        )}
+    if (this.props.messageList) {
+  	  return (
+  	    <div className={styles.messageList} >
+  	      <h1>Time {this.state.time}</h1>
+          {this.props.messageList.map((message) =>
+            <MessageContainer
+              key={message.id}
+              obj={message} 
+              deleteMessage={this.deleteMessage}
+            />
+          )}
 
-        <MessageFormContainer
-          obj={newMessage} 
-          addMessage={this.addMessage}
-        >
-        </MessageFormContainer>
-	    </div>
-	  );
+          <MessageFormContainer
+            obj={newMessage} 
+            addMessage={this.addMessage}
+            messageList={this.props.messageList}
+          >
+          </MessageFormContainer>
+  	    </div>
+  	  );
+    } else {
+      return null;
+    }
   }
 }

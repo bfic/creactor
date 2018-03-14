@@ -12,8 +12,6 @@ export default class Message extends Component {
     this.state = {
       editActive: false
     };
-
-
     this.handleEditClick = this.handleEditClick.bind(this);
   }
 
@@ -24,6 +22,7 @@ export default class Message extends Component {
 
 
   handleEditClick (value) {
+    console.log(this,value);
     if (value) {
       this.setState({
         editActive: value
@@ -47,7 +46,7 @@ export default class Message extends Component {
             {this.props.obj.text}
           </div>
 
-          <button className={styles.button} onClick={this.handleEditClick} >Edit</button>
+          <button className={styles.button} onClick={() => this.handleEditClick() } >Edit</button>
           <button  
             className={styles.button}
             onClick={e => {

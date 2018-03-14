@@ -5,6 +5,11 @@ import rootReducer from "../reducers/index";
 
 const loggerMiddleware = createLogger()
 
+/* 
+  redux-logger is loggin previous and next state in caonsole
+  redux-thunk middleware provides async communication in redux actions
+*/
+
 export default function configureStore(preloadedState) {
   return createStore(
     rootReducer,
@@ -15,12 +20,3 @@ export default function configureStore(preloadedState) {
     )
   )
 }
-
-/* redux-tunk middleware provides async communication in redux actions */
-
-/*
-const store = createStore(
-  rootReducer,
-  { messageList: [] }
-);
-*/
