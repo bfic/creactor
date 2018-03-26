@@ -9,7 +9,6 @@ const mapStateToProps = function (state) {
   })
 }
 
-
 const MessageListContainer = connect(
   mapStateToProps,
   null

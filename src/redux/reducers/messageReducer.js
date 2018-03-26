@@ -9,9 +9,10 @@ import {
 import { asyncLocalStorage } from './../../helpers/utils.js'
 
 const messageReducer = (state = [], action) => {
+  let newState = Object.assign({}, state);
   switch (action.type) {
     case ADD_MESSAGE:
-      let newState = Object.assign({}, state);
+      newState = Object.assign({}, state);
       if (!newState.messageList) {
         newState.messageList = [];
       }
@@ -21,8 +22,7 @@ const messageReducer = (state = [], action) => {
       })
 
       // Save state data in localStorage
-      asyncLocalStorage.setItem('applicationState', JSON.stringify(newState)).then((result) => {
-      });
+      asyncLocalStorage.setItem('applicationState', JSON.stringify(newState)).then((result) => {});
 
       return newState;
 
@@ -32,8 +32,7 @@ const messageReducer = (state = [], action) => {
       newState.messageList = newMessageList;
 
       // Save state data in localStorage
-      asyncLocalStorage.setItem('applicationState', JSON.stringify(newState)).then((result) => {
-      });
+      asyncLocalStorage.setItem('applicationState', JSON.stringify(newState)).then((result) => {});
 
       return newState;
 
@@ -45,9 +44,9 @@ const messageReducer = (state = [], action) => {
         }
       })
 
-      asyncLocalStorage.setItem('applicationState', JSON.stringify(newState)).then((result) => {
-      });
-      
+      // Save state data in localStorage
+      asyncLocalStorage.setItem('applicationState', JSON.stringify(newState)).then((result) => {});
+
       return newState;
 
     case REQUEST_MESSAGES:

@@ -22,10 +22,6 @@ export default class MessageList extends Component {
     		time: new Date().toLocaleTimeString(),
     	});
     }, 1000);
-
-    this.addMessage = this.addMessage.bind(this);
-    this.updateMessage = this.updateMessage.bind(this);
-    this.deleteMessage = this.deleteMessage.bind(this);
   };
 
   static propTypes: {
@@ -43,30 +39,6 @@ export default class MessageList extends Component {
   	window.clearInterval(this.timer);
   }
 
-  addMessage (obj) {
-    this.setState({
-      messageFormObj: {
-        id: this.props.messageList.length+1,
-        message: '',
-      },
-      formAction: 'add'
-    }) 
-  }
-
-  deleteMessage (messageId) {
-    // this is also reactive
-    let index = undefined;
-    this.props.messageList.map((msg, i) => {
-      if (msg.id == messageId) {
-        index = i;
-      }
-    });
-    this.state.messageList.splice(index, 1); 
-  }
-
-  updateMessage () {
-
-  }
 
   render () {
     const newMessage = {
@@ -82,13 +54,11 @@ export default class MessageList extends Component {
             <MessageContainer
               key={message.id}
               obj={message} 
-              deleteMessage={this.deleteMessage}
             />
           )}
 
           <MessageFormContainer
             obj={newMessage} 
-            addMessage={this.addMessage}
             messageList={this.props.messageList}
           >
           </MessageFormContainer>
